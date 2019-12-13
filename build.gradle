@@ -1,0 +1,27 @@
+import com.bmuschko.gradle.docker.tasks.image.*
+
+plugins {
+    id 'java'
+    id 'com.bmuschko.docker-remote-api' version '6.1.1'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.graalvm.sdk', name: 'polyglot-tck', version: '19.3.0'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task buildMyAppImage(type: DockerBuildImage) {
+    inputDir = file('.')
+    images.add('test/myapp:latest')
+}
