@@ -1,8 +1,9 @@
 FROM oracle/graalvm-ce:19.3.0
 
 RUN gu install python
-
-RUN echo 'import java \
-          array = java.type("int[]")(4) \
-          array[2] = 42 \
-          print(array[2])' > polyglot.py
+RUN yum install git -y
+RUN git clone https://github.com/sausageRoll/ecc-python-graal.git
+WORKDIR ecc-python-graal
+RUN ./gradlew build jar
+RUN ls build
+ENTRYPOINT ["java", "-jar", "/ecc-python-graal/build/libs/ecc-python-graal-1.0-SNAPSHOT.jar"]

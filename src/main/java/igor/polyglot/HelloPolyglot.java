@@ -1,3 +1,5 @@
+package igor.polyglot;
+
 import org.graalvm.polyglot.Context;
 
 public class HelloPolyglot {

@@ -10,7 +10,6 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
-
 repositories {
     mavenCentral()
 }
@@ -23,5 +22,11 @@ dependencies {
 
 task buildMyAppImage(type: DockerBuildImage) {
     inputDir = file('.')
-    images.add('test/myapp:latest')
+    images.add('igor/python-on-graal:latest')
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'igor.polyglot.HelloPolyglot'
+    }
 }
